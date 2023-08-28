@@ -102,6 +102,10 @@ export class MyZodSchemaVisitor extends BaseSchemaVisitor {
     };
   }
 
+  get InterfaceTypeDefinition() {
+    return this.ObjectTypeDefinition;
+  }
+
   get EnumTypeDefinition() {
     return {
       leave: (node: EnumTypeDefinitionNode) => {
@@ -272,6 +276,7 @@ const generateNameNodeMyZodSchema = (
   switch (converter?.targetKind) {
     case 'InputObjectTypeDefinition':
     case 'ObjectTypeDefinition':
+    case 'InterfaceTypeDefinition':
     case 'UnionTypeDefinition':
       // using switch-case rather than if-else to allow for future expansion
       switch (config.validationSchemaExportType) {
